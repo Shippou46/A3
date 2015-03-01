@@ -1,0 +1,55 @@
+package DB;
+
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+
+import javax.sql.*;
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+public class MyDB {
+
+	public Connection connect;
+	public String url = "jdbc:mysql://devcloud.fulgentcorp.com:3306/soq971";
+	public String user = "soq971";
+	public String pw = "KzZSQolR5vFF69sboLh4";
+
+	public MyDB() {
+
+		DataSource src = getDataSource();
+		try {
+			this.connect = src.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private DataSource getDataSource() {
+		Properties p = new Properties();
+
+		FileInputStream f = null;
+		try {
+			f = new FileInputStream("DatabaseProperties");
+			p.load(f);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		MysqlDataSource DS = new MysqlDataSource();
+		DS.setURL(p.getProperty(url));
+		DS.setUser(p.getProperty(user));
+		DS.setPassword(p.getProperty(pw));
+
+		return DS;
+	}
+
+	public void closeDB() throws SQLException {
+		this.connect.close();
+	}
+
+}

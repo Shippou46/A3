@@ -1,0 +1,4 @@
+MYSQL_DB_DRIVER_CLASS=com.mysql.jdbc.Driver
+MYSQL_DB_URL=jdbc:mysql://devcloud.fulgentcorp.com:3306/soq971
+MYSQL_DB_USER=soq971
+MYSQL_DB_PW=KzZSQolR5vFF69sboLh4​

@@ -1,0 +1,10 @@
+package DB;
+
+import Part;
+public class DBM {
+
+	public static void main(String[] args){
+		Part part = new Part("Needle", "1", "Target", );
+
+	}
+}

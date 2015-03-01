@@ -1,0 +1,44 @@
+package DB;
+
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+
+import javax.sql.*;
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+public class MyDB {
+
+	public Connection connect;
+	public String url = "jdbc:mysql://devcloud.fulgentcorp.com:3306/soq971";
+	public String user = "soq971";
+	public String password = "KzZSQolR5vFF69sboLh4";
+
+	public MyDB() throws FileNotFoundException {
+
+		DataSource src = getDataSource();
+		try {
+			this.connect = src.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private DataSource getDataSource() throws FileNotFoundException {
+		Properties p = new Properties();
+		FileInputStream f = new FileInputStream("DatabaseProperties");
+
+		MysqlDataSource DS = new MysqlDataSource();
+		DS.setURL(p.getProperty("MYSQL_DB_URL"));
+		DS.setUser(p.getProperty("MYSQL_DB_USER"));
+		DS.setPassword(p.getProperty("MYSQL_DB_PW"));
+
+		return DS;
+	}
+
+	public void closeDB() throws SQLException {
+		this.connect.close();
+	}
+
+}
